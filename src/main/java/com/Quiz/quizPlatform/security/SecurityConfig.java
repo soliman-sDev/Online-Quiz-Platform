@@ -33,6 +33,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers("/auth/**")
                                 .permitAll()
+                                .requestMatchers("/admin/quizzes/**").hasAuthority("ADMIN")
+                                .requestMatchers("/quizzes/**").hasAuthority("USER")
                                 .anyRequest()
                                 .authenticated()
                 ).sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
